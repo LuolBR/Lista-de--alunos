@@ -1,7 +1,7 @@
 # Lista-de--alunos
-Student list registration - Alura
+Student list registration
 
-#This project is part of Alura's Android training!  
+#This project is part of **Alura's Android training**!  
 
 **The project language is Portuguese.**
 
