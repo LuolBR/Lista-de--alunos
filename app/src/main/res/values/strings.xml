@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lista de Alunos</string>
+    <string name="btn_name">Add</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="salvar">Salvar</string>
+</resources>
