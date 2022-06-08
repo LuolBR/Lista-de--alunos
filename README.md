@@ -1,5 +1,5 @@
 # Lista-de--alunos
-Student list registration
+Student list registration - Alura
 
 #This project is part of Alura's Android training!  
 
