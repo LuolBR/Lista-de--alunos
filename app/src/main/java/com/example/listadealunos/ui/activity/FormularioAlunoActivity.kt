@@ -1,7 +1,8 @@
 package com.example.listadealunos.ui.activity
 
 import android.os.Bundle
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listadealunos.R
@@ -26,10 +27,7 @@ class FormularioAlunoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario_aluno)
 
-
         inicializacaoCampos()
-        configuraBotaoSalvar()
-
         carregaAluno()
     }
 
@@ -44,6 +42,20 @@ class FormularioAlunoActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater
+            .inflate(R.menu.activity_formulario_aluno_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.activity_formulario_aluno_menu_salvar) {
+            preencheAluno()
+            finalizaFormulario()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun preencheCampos() {
         campoNome.setText(aluno.nome)
         campoTelefone.setText(aluno.telefone)
@@ -54,15 +66,6 @@ class FormularioAlunoActivity : AppCompatActivity() {
         campoNome = findViewById(R.id.acitivity_formulario_aluno_nome)
         campoTelefone = findViewById(R.id.acitivity_formulario_aluno_telefone)
         campoEmail = findViewById(R.id.acitivity_formulario_aluno_email)
-    }
-
-    private fun configuraBotaoSalvar() {
-        val btnSalvar: Button = findViewById(R.id.activity_formulario_aluno_salvar)
-        btnSalvar.setOnClickListener {
-
-            preencheAluno()
-            finalizaFormulario()
-        }
     }
 
     private fun preencheAluno() {

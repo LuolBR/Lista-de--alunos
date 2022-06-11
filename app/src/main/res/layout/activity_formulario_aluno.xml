@@ -43,14 +43,5 @@
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:textColorHint="#A1887F" />
-
-        <Button
-            android:id="@+id/activity_formulario_aluno_salvar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/salvar"
-            android:textColor="#3E2723"
-            app:backgroundTint="#959393" />
     </LinearLayout>
 </ScrollView>
