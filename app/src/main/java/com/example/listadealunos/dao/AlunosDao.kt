@@ -32,6 +32,14 @@ class AlunosDao {
         }
     }
 
+    fun remove(aluno: Aluno?) {
+        val alunoExcluido = buscaAlunoPeloId(aluno)
+
+        if (alunoExcluido != null) {
+            alunos.remove(alunoExcluido)
+        }
+    }
+
     private fun buscaAlunoPeloId(aluno: Aluno?): Aluno? {
         for (a in alunos) {
             if (a.getID() == aluno?.getID()) {

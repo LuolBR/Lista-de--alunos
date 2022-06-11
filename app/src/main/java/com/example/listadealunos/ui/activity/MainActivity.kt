@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         private const val MAIN_APPBAR: String = "Lista de alunos"
     }
 
+    private lateinit var adapter: ArrayAdapter<Aluno>
     private val dao = AlunosDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         this.title = MAIN_APPBAR
 
         configuraFabNovoAluno()
+        configuraLista()
 
         val pessoa1 = Aluno(nome = "Teste1", telefone = "1234", email = "teste1@dev.com")
         val pessoa2 = Aluno(nome = "Teste2", telefone = "1234", email = "teste2@dev.com")
@@ -47,27 +49,40 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        configuraLista()
+        atualizaAlunos()
+    }
+
+    private fun atualizaAlunos() {
+        adapter.clear()
+        adapter.addAll(dao.listaTodosAlunos())
     }
 
     private fun configuraLista() {
-
         val listaDeAlunos = findViewById<ListView>(R.id.activity_main_lista_de_alunos)
-        val alunos: List<Aluno> = dao.listaTodosAlunos()
 
-        configuraAdapter(alunos, listaDeAlunos)
+        configuraAdapter(listaDeAlunos)
         configuraListenerCliquePorItem(listaDeAlunos)
+        configuraListenerCliqueLongoPorItem(listaDeAlunos)
     }
 
-    private fun configuraAdapter(
-        alunos: List<Aluno>,
-        listaDeAlunos: ListView
-    ) {
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_expandable_list_item_1,
-            alunos
-        ).apply { listaDeAlunos.adapter = this }
+    private fun configuraListenerCliqueLongoPorItem(listaDeAlunos: ListView) {
+        listaDeAlunos.setOnItemLongClickListener { adapterView, _, posicao, _ ->
+            val alunoEscolhido = adapterView.getItemAtPosition(posicao) as Aluno
+            remove(alunoEscolhido)
+            true
+        }
+    }
+
+    private fun remove(aluno: Aluno) {
+        dao.remove(aluno)
+        adapter.remove(aluno)
+    }
+
+    private fun configuraAdapter(listaDeAlunos: ListView) {
+        adapter = ArrayAdapter(this,
+            android.R.layout.simple_expandable_list_item_1
+        )
+        listaDeAlunos.adapter = adapter
     }
 
     private fun configuraListenerCliquePorItem(
