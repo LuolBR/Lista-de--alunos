@@ -10,6 +10,7 @@ Student list registration
 - The ET fields are for capturing the name, phone and e-mail;
 - When clicking on the Button, a new object of type Aluno (Student) is created and saved in a DAO (Data Access Object) to be displayed on Main Activity
 in the form of a list and finishing the Activity of the form;
+- The students saved on the list can be edited and/or deleted;
 - The project at Alura was developed in Java but I did it in the Kotlin language;
 
 Portuguese descrption:
@@ -19,4 +20,5 @@ Portuguese descrption:
 - Os campos de ETs são para captar o nome, telefone e e-mail;
 Ao clicar no Button é criado um novo objeto do tipo Aluno e salvo em um DAO (Data Access Object) para ser exibido Main Activity 
 em forma de lista e finalizando a Activity do formulário;
+- Os alunos salvos na lista podem ser editados e/ou deletados;
 - O projeto na Alura foi desenvolvido em Java porém eu o fiz na linguagem Kotlin;
