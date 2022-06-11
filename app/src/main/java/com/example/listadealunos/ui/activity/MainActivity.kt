@@ -2,6 +2,10 @@ package com.example.listadealunos.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +51,30 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.activity_main_menu, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.activity_main_menu_remover) {
+            val menuInfo: AdapterView.AdapterContextMenuInfo = item
+                .menuInfo as AdapterView.AdapterContextMenuInfo
+            val alunoEscolhido: Aluno? = adapter.getItem(menuInfo.position)
+            remove(alunoEscolhido)
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    private fun remove(aluno: Aluno?) {
+        dao.remove(aluno)
+        adapter.remove(aluno)
+    }
+
     override fun onResume() {
         super.onResume()
         atualizaAlunos()
@@ -62,21 +90,9 @@ class MainActivity : AppCompatActivity() {
 
         configuraAdapter(listaDeAlunos)
         configuraListenerCliquePorItem(listaDeAlunos)
-        configuraListenerCliqueLongoPorItem(listaDeAlunos)
+        registerForContextMenu(listaDeAlunos)
     }
 
-    private fun configuraListenerCliqueLongoPorItem(listaDeAlunos: ListView) {
-        listaDeAlunos.setOnItemLongClickListener { adapterView, _, posicao, _ ->
-            val alunoEscolhido = adapterView.getItemAtPosition(posicao) as Aluno
-            remove(alunoEscolhido)
-            true
-        }
-    }
-
-    private fun remove(aluno: Aluno) {
-        dao.remove(aluno)
-        adapter.remove(aluno)
-    }
 
     private fun configuraAdapter(listaDeAlunos: ListView) {
         adapter = ArrayAdapter(this,

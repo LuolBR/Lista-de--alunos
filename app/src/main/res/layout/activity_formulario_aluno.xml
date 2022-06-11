@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context=".ui.activity.FormularioAlunoActivity">
 
-    <EditText
-        android:id="@+id/acitivity_formulario_aluno_nome"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:autofillHints=""
-        android:hint="@string/nome"
-        android:inputType="textCapSentences"
-        android:minHeight="48dp" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/acitivity_formulario_aluno_telefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:autofillHints=""
-        android:hint="@string/telefone"
-        android:inputType="phone"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/acitivity_formulario_aluno_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints=""
+            android:hint="@string/nome"
+            android:inputType="textCapSentences"
+            android:minHeight="48dp"
+            android:textColorHint="#A1887F" />
 
-    <EditText
-        android:id="@+id/acitivity_formulario_aluno_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:autofillHints=""
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/acitivity_formulario_aluno_telefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints=""
+            android:hint="@string/telefone"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:textColorHint="#A1887F" />
 
-    <Button
-        android:id="@+id/activity_formulario_aluno_salvar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/salvar"
-        app:backgroundTint="#959393" />
+        <EditText
+            android:id="@+id/acitivity_formulario_aluno_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints=""
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColorHint="#A1887F" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/activity_formulario_aluno_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/salvar"
+            android:textColor="#3E2723"
+            app:backgroundTint="#959393" />
+    </LinearLayout>
+</ScrollView>
