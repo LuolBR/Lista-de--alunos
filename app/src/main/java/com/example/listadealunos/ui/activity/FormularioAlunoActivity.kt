@@ -7,22 +7,47 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.listadealunos.R
 import com.example.listadealunos.dao.AlunosDao
 import com.example.listadealunos.model.Aluno
-
-const val NOVOALUNO_APPBAR: String = "Novo aluno"
+import com.example.listadealunos.ui.activity.ConstantesActivities.Companion.CHAVE_ALUNO
 
 class FormularioAlunoActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TITULO_NOVO_ALUNO_APPBAR: String = "Novo aluno"
+        private const val TITULO_EDITA_ALUNO_APPBAR: String = "Edita aluno"
+    }
+
     private lateinit var campoNome: EditText
     private lateinit var campoTelefone: EditText
     private lateinit var campoEmail: EditText
+    private lateinit var aluno: Aluno
     private val dao = AlunosDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario_aluno)
-        this.title = NOVOALUNO_APPBAR
+
 
         inicializacaoCampos()
         configuraBotaoSalvar()
+
+        carregaAluno()
+    }
+
+    private fun carregaAluno() {
+        if (intent.hasExtra(CHAVE_ALUNO)) {
+            aluno = intent.extras?.getSerializable(CHAVE_ALUNO) as Aluno
+            this.title = TITULO_EDITA_ALUNO_APPBAR
+            preencheCampos()
+        } else {
+            this.title = TITULO_NOVO_ALUNO_APPBAR
+            aluno = Aluno(nome = "", telefone = "", email = "")
+        }
+    }
+
+    private fun preencheCampos() {
+        campoNome.setText(aluno.nome)
+        campoTelefone.setText(aluno.telefone)
+        campoEmail.setText(aluno.email)
     }
 
     private fun inicializacaoCampos() {
@@ -34,21 +59,28 @@ class FormularioAlunoActivity : AppCompatActivity() {
     private fun configuraBotaoSalvar() {
         val btnSalvar: Button = findViewById(R.id.activity_formulario_aluno_salvar)
         btnSalvar.setOnClickListener {
-            val novoAluno = criaAluno()
-            salva(novoAluno)
+
+            preencheAluno()
+            finalizaFormulario()
         }
     }
 
-    private fun criaAluno(): Aluno {
+    private fun preencheAluno() {
         val nome = campoNome.text.toString()
         val telefone = campoTelefone.text.toString()
         val email = campoEmail.text.toString()
 
-        return Aluno(nome, telefone, email)
+        aluno.nome = nome
+        aluno.telefone = telefone
+        aluno.email = email
     }
 
-    private fun salva(aluno: Aluno) {
-        dao.salva(aluno)
+    private fun finalizaFormulario() {
+        if (aluno.getID() > 0) {
+            dao.edita(aluno)
+        } else {
+            dao.salva(aluno)
+        }
         finish()
     }
 }
