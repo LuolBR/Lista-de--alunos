@@ -1,11 +1,20 @@
 package com.example.listadealunos.model
 
-data class Aluno(
-    val nome: String,
-    val telefone: String,
-    val email: String
-) {
+import java.io.Serializable
+
+class Aluno(var nome: String, var telefone: String, var email: String) : Serializable {
+
+    private var id: Int = 0
+
+    fun setID(id: Int) {
+        this.id = id
+    }
+
+    fun getID(): Int {
+        return id
+    }
+
     override fun toString(): String {
-        return "$nome"
+        return nome
     }
 }
