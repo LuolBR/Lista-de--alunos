@@ -1,18 +1,20 @@
 package com.example.listadealunos.ui.activity
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listadealunos.R
 import com.example.listadealunos.dao.AlunosDao
 import com.example.listadealunos.model.Aluno
 import com.example.listadealunos.ui.activity.ConstantesActivities.Companion.CHAVE_ALUNO
+import com.example.listadealunos.ui.adapter.ListaAlunoAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         private const val MAIN_APPBAR: String = "Lista de alunos"
     }
 
-    private lateinit var adapter: ArrayAdapter<Aluno>
+    private lateinit var adapter: ListaAlunoAdapter
     private val dao = AlunosDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         configuraFabNovoAluno()
         configuraLista()
-
-        val pessoa1 = Aluno(nome = "Teste1", telefone = "1234", email = "teste1@dev.com")
-        val pessoa2 = Aluno(nome = "Teste2", telefone = "1234", email = "teste2@dev.com")
-        dao.salva(pessoa1)
-        dao.salva(pessoa2)
     }
 
     private fun configuraFabNovoAluno() {
@@ -62,15 +59,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.activity_main_menu_remover) {
-            val menuInfo: AdapterView.AdapterContextMenuInfo = item
-                .menuInfo as AdapterView.AdapterContextMenuInfo
-            val alunoEscolhido: Aluno? = adapter.getItem(menuInfo.position)
-            remove(alunoEscolhido)
+            confirmaRemocao(item)
         }
         return super.onContextItemSelected(item)
     }
 
-    private fun remove(aluno: Aluno?) {
+    private fun confirmaRemocao(item: MenuItem) {
+        AlertDialog
+            .Builder(this)
+            .setTitle("Removendo Aluno")
+            .setMessage("Tem certeza que deseja excluir o aluno?")
+            .setPositiveButton("Sim") { _: DialogInterface, _: Int ->
+                val menuInfo: AdapterView.AdapterContextMenuInfo = item
+                    .menuInfo as AdapterView.AdapterContextMenuInfo
+                val alunoEscolhido: Aluno = adapter.getItem(menuInfo.position) as Aluno
+                remove(alunoEscolhido)
+            }
+            .setNegativeButton("Não", null)
+            .show()
+    }
+
+    private fun remove(aluno: Aluno) {
         dao.remove(aluno)
         adapter.remove(aluno)
     }
@@ -81,8 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun atualizaAlunos() {
-        adapter.clear()
-        adapter.addAll(dao.listaTodosAlunos())
+        adapter.atualiza(dao.listaTodosAlunos())
     }
 
     private fun configuraLista() {
@@ -95,9 +103,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun configuraAdapter(listaDeAlunos: ListView) {
-        adapter = ArrayAdapter(this,
-            android.R.layout.simple_expandable_list_item_1
-        )
+        adapter = ListaAlunoAdapter(this)
         listaDeAlunos.adapter = adapter
     }
 
@@ -119,3 +125,9 @@ class MainActivity : AppCompatActivity() {
         )
     }
 }
+
+
+
+
+
+
