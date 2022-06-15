@@ -4,7 +4,6 @@
     <string name="nome">Nome</string>
     <string name="telefone">Telefone</string>
     <string name="email">E-mail</string>
-    <string name="salvar">Salvar</string>
     <string name="remover">Remover</string>
     <string name="salvar_aluno">Salvar aluno</string>
 </resources>
