@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/olive/AndroidStudioProjects/ListadeAlunos/app/src/main/res/drawable-anydpi/ic_action_adiciona_aluno.xml" value="0.2745" />
+        <entry key="..\:/Users/olive/AndroidStudioProjects/ListadeAlunos/app/src/main/res/drawable-anydpi/ic_action_salva_aluno.xml" value="0.5315" />
         <entry key="..\:/Users/olive/AndroidStudioProjects/ListadeAlunos/app/src/main/res/layout/activity_formulario_aluno.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/olive/AndroidStudioProjects/ListadeAlunos/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/olive/AndroidStudioProjects/ListadeAlunos/app/src/main/res/layout/item_aluno.xml" value="0.4519025224454895" />
