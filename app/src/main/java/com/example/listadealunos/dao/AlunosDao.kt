@@ -32,7 +32,7 @@ class AlunosDao {
         }
     }
 
-    fun remove(aluno: Aluno?) {
+    fun remove(aluno: Aluno) {
         val alunoExcluido = buscaAlunoPeloId(aluno)
 
         if (alunoExcluido != null) {
