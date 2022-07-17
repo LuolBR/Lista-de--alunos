@@ -1,5 +1,16 @@
 # Lista-de--alunos
-Student list registration
+
+<p align="center">
+<a href="#English_description">English</a> -
+<a href="#Descrição_em_português">Português</a>
+</p>
+
+<h3 align="center">
+  <img alt="Readme" title="Readme" src="https://github.com/LuolBR/Lista-de--alunos/blob/master/lista_alunos.gif"/>
+</h3>
+
+# English_description
+<h2>Student list registration</h2>
 
 #This project is part of **Alura's Android training**!  
 
@@ -13,7 +24,10 @@ Student list registration
 - The students saved on the list can be edited and/or deleted through a Context Menu by long-clicking (pressing) the item;
 - The project at Alura was developed in Java but I did it in Kotlin language;
 
-Portuguese descrption:
+# Descrição_em_português
+<h2>Lista de registro de alunos</h2>
+
+#Esse projeto é parte da **formação Android da Alura**!  
 
 - É um projeto CRUD básico onde são utilizadas duas Activities no intuito de na tela principal apresentar uma List View e um Floating Action button (FAB);
 - Ao clicar no FAB é iniciada uma nova Activity onde tem um formulário de cadastro com três Edit Texts (ETs) e Menu de Opções - Salvar;
